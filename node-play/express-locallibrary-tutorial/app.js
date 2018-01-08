@@ -43,4 +43,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//Set up mongoose connection
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://tobyprivett:password@ds247587.mlab.com:47587/local_library';
+mongoose.connect(mongoDB, {
+  useMongoClient: true
+});
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 module.exports = app;
